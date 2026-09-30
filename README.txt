@@ -1,0 +1,1 @@
+Upload index.html, privacy.html, terms.html and contact.html to your GitHub Pages repository. Replace your-email@example.com before publishing. Advertisement boxes are placeholders; add AdSense code only after approval.
