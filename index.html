@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="QR For You - Create free QR codes instantly for links, text, Wi-Fi and more.">
+  <title>QR For You — Free QR Code Generator</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    :root{--bg:#f6f8fc;--card:#fff;--text:#172033;--muted:#667085;--primary:#5b5cf0;--primary2:#7c3aed;--border:#e7eaf0}
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--text)}
+    header{background:rgba(255,255,255,.92);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:5;backdrop-filter:blur(12px)}
+    nav{max-width:1100px;margin:auto;padding:18px 22px;display:flex;align-items:center;justify-content:space-between}
+    .logo{font-size:23px;font-weight:800;letter-spacing:-.6px}.logo span{color:var(--primary)}
+    .tag{font-size:13px;color:var(--muted)}
+    .hero{max-width:1100px;margin:48px auto 24px;padding:0 22px;text-align:center}
+    .pill{display:inline-block;padding:8px 13px;border-radius:999px;background:#ececff;color:var(--primary);font-weight:700;font-size:12px}
+    h1{font-size:clamp(38px,7vw,68px);line-height:1.02;margin:17px 0 12px;letter-spacing:-2.5px}
+    .hero p{max-width:650px;margin:0 auto;color:var(--muted);font-size:17px;line-height:1.6}
+    .ad{max-width:970px;min-height:90px;margin:26px auto;padding:16px 22px;border:1px dashed #cfd4df;border-radius:14px;color:#98a0ae;font-size:12px;display:flex;align-items:center;justify-content:center;background:#fbfcfe}
+    .app{max-width:1000px;margin:28px auto 60px;padding:0 22px;display:grid;grid-template-columns:1.15fr .85fr;gap:22px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:26px;box-shadow:0 10px 35px rgba(30,41,59,.06)}
+    label{display:block;font-weight:700;font-size:14px;margin-bottom:9px}
+    textarea,input{width:100%;border:1px solid var(--border);border-radius:14px;padding:14px 15px;font:inherit;outline:none;background:#fff}
+    textarea{min-height:150px;resize:vertical} textarea:focus,input:focus{border-color:var(--primary);box-shadow:0 0 0 4px #5b5cf015}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:15px}
+    button{border:0;border-radius:14px;padding:14px 18px;font-weight:800;font-size:14px;cursor:pointer}
+    .primary{background:linear-gradient(135deg,var(--primary),var(--primary2));color:white;width:100%;margin-top:16px}
+    .secondary{background:#f0f1f6;color:var(--text);width:100%;margin-top:10px}
+    .preview{min-height:360px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+    #qrcode{padding:18px;background:#fff;border-radius:18px;min-height:216px;min-width:216px;display:flex;align-items:center;justify-content:center}
+    .hint{font-size:13px;color:var(--muted);margin-top:17px}
+    .features{max-width:1000px;margin:0 auto 60px;padding:0 22px;display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+    .feature{background:#fff;border:1px solid var(--border);border-radius:18px;padding:20px}.feature b{display:block;margin-bottom:7px}.feature p{color:var(--muted);font-size:13px;line-height:1.5;margin:0}
+    footer{padding:30px 22px;text-align:center;color:var(--muted);font-size:13px;border-top:1px solid var(--border);background:#fff}
+    @media(max-width:760px){.app,.features{grid-template-columns:1fr}.hero{margin-top:35px}.row{grid-template-columns:1fr}.card{padding:20px}}
+  </style>
+</head>
+<body>
+<header><nav><div class="logo">QR <span>FOR YOU</span></div><div class="tag">Free QR Code Generator</div></nav></header>
+
+<section class="hero">
+  <span class="pill">100% Free • Fast • Easy</span>
+  <h1>Create your QR code.</h1>
+  <p>Paste a link or type any text, generate your QR code instantly, and download it for free.</p>
+</section>
+
+<!-- Replace this placeholder with your approved Google AdSense ad unit later. -->
+<div class="ad">ADVERTISEMENT</div>
+
+<main class="app">
+  <section class="card">
+    <label for="content">Your content</label>
+    <textarea id="content" placeholder="https://example.com">https://example.com</textarea>
+    <div class="row">
+      <div><label for="size">Size</label><select id="size" style="width:100%;padding:14px;border:1px solid var(--border);border-radius:14px;font:inherit"><option value="180">180 × 180</option><option value="220" selected>220 × 220</option><option value="280">280 × 280</option><option value="320">320 × 320</option></select></div>
+      <div><label for="name">File name</label><input id="name" value="qr-for-you"></div>
+    </div>
+    <button class="primary" onclick="generateQR()">Generate QR Code</button>
+    <button class="secondary" onclick="downloadQR()">Download PNG</button>
+  </section>
+
+  <section class="card preview">
+    <div id="qrcode"></div>
+    <div class="hint">Your QR code appears here. Scan it with your phone to test it.</div>
+  </section>
+</main>
+
+<div class="ad">ADVERTISEMENT</div>
+
+<section class="features">
+  <div class="feature"><b>⚡ Instant</b><p>Generate a QR code directly in your browser without waiting for a server.</p></div>
+  <div class="feature"><b>🔒 Private</b><p>Your entered text is processed in your browser and isn't uploaded by this page.</p></div>
+  <div class="feature"><b>⬇️ Download</b><p>Save your generated QR code as a PNG image and use it anywhere.</p></div>
+</section>
+
+<footer>© 2026 QR For You · Free QR Code Generator</footer>
+
+<script>
+  let qr;
+  function generateQR(){
+    const content=document.getElementById('content').value.trim();
+    const size=parseInt(document.getElementById('size').value);
+    const box=document.getElementById('qrcode');
+    if(!content){alert('Please enter a link or text first.');return;}
+    box.innerHTML='';
+    qr=new QRCode(box,{text:content,width:size,height:size,colorDark:"#111827",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.H});
+  }
+  function downloadQR(){
+    if(!qr){generateQR();}
+    setTimeout(()=>{
+      const canvas=document.querySelector('#qrcode canvas');
+      if(!canvas){alert('Please generate the QR code first.');return;}
+      const a=document.createElement('a');
+      a.download=(document.getElementById('name').value.trim()||'qr-for-you')+'.png';
+      a.href=canvas.toDataURL('image/png'); a.click();
+    },150);
+  }
+  generateQR();
+</script>
+</body>
+</html>
